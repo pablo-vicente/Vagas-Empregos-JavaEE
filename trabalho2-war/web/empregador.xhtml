@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="estilo.css" rel="stylesheet" type="text/css" />
+        <title>Tipo de Cliente</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:commandButton id="back" value="Voltar" action="index" />
+            <div id="topoEmpregado">
+                <h:form id="form">
+                    <p:growl id="msgs" showDetail="true" />
+                    <h3 style="margin-top:0"><br>Aqui você pode cadastrar ou excluir uma vaga e vizualizar os currículos por vaga!</br></h3>
+                    <p:tabView>
+                        
+                        <p:tab title="Editar Vagas">
+                            <h:panelGrid columns="1" cellpadding="1">
+                                <h:form>
+                                    <p:outputLabel value="Tipo de vaga:* " />
+                                    <br/>
+                                    <p:selectOneListbox id="basic" value="#{GerenciadorVagas.tipoVaga}">
+                                    <f:selectItem itemLabel="Estágio" itemValue="1" />
+                                    <f:selectItem itemLabel="Emprego" itemValue="2" />
+                                    </p:selectOneListbox>
+                                    <br/>
+                                    
+                                    <p:outputLabel value="Area de Atuação:* " />
+                                    <br/>
+                                    <p:inputText value="#{GerenciadorVagas.areaAtuacao}"/>
+                                    <br/>
+                                    
+                                    <p:outputLabel value="Empresa:* "/>
+                                    <br/>
+                                    <p:inputText value="#{GerenciadorVagas.empresa}"/>
+                                    <br/>
+                                    
+                                    <p:outputLabel value="Descrição:* "/>
+                                    <br/>
+                                    <p:inputTextarea value="#{GerenciadorVagas.descricao}"/>
+                                    <br/>
+                                    
+                                    <p:outputLabel value="Remuneração: *" />
+                                    <br/>
+                                    <p:inputMask value="#{GerenciadorVagas.remuneracao}" mask="999999999"/>
+                                    <br/>
+                                    <p:commandButton value="Cadastrar Vaga" action="#{GerenciadorVagas.cadastrarVaga()}"/>
+                                    <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true"></p:messages>
+                                </h:form>
+                            </h:panelGrid>
+                            
+                        </p:tab>
+                        
+                        <p:tab title="Currículos">
+                                <h:panelGrid columns="1" cellpadding="10">
+                                    
+                                    
+                                    <p:dataScroller value="#{GerenciadorVagas.vagasDisponiveisPorEmpregador}" var="vagaEmpregador" >
+                                        <p:panel header="Vaga" style="text-align: center">
+                                        <strong><p:outputLabel value="Código vaga: "/></strong>
+                                        <p:outputLabel value="#{vagaEmpregador.idvaga}"/>
+                                        <br/>
+                                        <strong><p:outputLabel value="Tipo de vaga: "/></strong>
+                                        <p:outputLabel value="#{vagaEmpregador.tipo}"/>
+                                        <br/>
+                                        <strong><p:outputLabel value="Area de Atuacação: "/></strong>
+                                        <p:outputLabel value="#{vagaEmpregador.atuacao}"/>
+                                        <br/>
+                                        <strong><p:outputLabel value="Empresa: "/></strong>
+                                        <p:outputLabel value="#{vagaEmpregador.empresa}"/>
+                                        <br/>
+                                        <strong><p:outputLabel value="Descrição: "/></strong>
+                                        <p:outputLabel value="#{vagaEmpregador.descricao}"/>
+                                        <br/>
+                                        <strong><p:outputLabel value="Remuneração: "/></strong>
+                                        <p:outputLabel value="#{vagaEmpregador.remuneracao}"/>
+                                        <br/>
+                                        <p:dataScroller value="#{gerenciadorCadastros.getCurriculosNaVga(vagaEmpregador.idvaga)}" var="cad">
+                                            <p:panel header="Currículo" style="text-align: center"> 
+                                            <p:editor value="#{cad.curriculo}" disabled="true"/>
+                                            </p:panel>
+                                        </p:dataScroller>
+                                        </p:panel>
+                                    </p:dataScroller>
+                                </h:panelGrid>
+                        </p:tab>
+                        
+                        <p:tab title="Vagas Abertas">
+                            <p:outputLabel value="Código vaga: "/>
+                            <p:inputMask value="#{GerenciadorVagas.vaga}" mask="9999"/>
+                            <p:commandButton value="Fechar Vaga" action="#{GerenciadorVagas.fecharVaga()}" ajax="false"/>
+                            <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true"></p:messages>
+                                <h:panelGrid columns="1" cellpadding="1">
+                                    <p:dataTable var="VagasAbertas" value="#{GerenciadorVagas.vagasDisponiveisPorEmpregador}">
+                                        <p:column headerText="Código Vaga">
+                                            <h:outputText value="#{VagasAbertas.idvaga}" />
+                                        </p:column>
+                                        <p:column headerText="Tipo de Vaga">
+                                            <h:outputText value="#{VagasAbertas.tipo}" /> 
+                                        </p:column>
+                                        <p:column headerText="Area de Atuação">
+                                            <h:outputText value="#{VagasAbertas.atuacao}" />
+                                        </p:column>
+                                        <p:column headerText="Empresa Contratante">
+                                            <h:outputText value="#{VagasAbertas.empresa}" />
+                                        </p:column>
+                                        <p:column headerText="Descrição Vaga">
+                                            <h:outputText value="#{VagasAbertas.descricao}" />
+                                        </p:column>
+                                        <p:column headerText="Remuneração">
+                                            <h:outputText value="#{VagasAbertas.remuneracao}" />
+                                        </p:column>
+                                    </p:dataTable>
+                                </h:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+                </h:form>
+            </div>
+    </h:form>
+    </h:body>
+</html>
+

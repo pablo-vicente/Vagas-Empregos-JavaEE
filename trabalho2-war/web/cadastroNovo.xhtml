@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cadastro Usuario</title>
+    </h:head>
+    <h:body>
+<h:form>
+    <p:commandButton id="back" value="Voltar" action="index.xhtml" />
+    </h:form>
+    <h:form>
+    <p:panel id="panel" header="Novo Usuário">
+ 
+        <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true">
+    </p:messages>
+ 
+        <h:panelGrid columns="2" cellpadding="3">
+            <p:outputLabel for="login" value="Login: " />
+            <p:inputText id="login" value="#{gerenciadorCadastros.login}" required="false" label="login"/>
+ 
+            <p:outputLabel for="nome" value="Nome: " />
+            <p:inputText id="nome" value="#{gerenciadorCadastros.nome}" label="Nome" required="false"/>
+            
+             <h:outputLabel value="Senha:*" />
+             <p:inputText id="senha" value="#{gerenciadorCadastros.senha}" required="false" />
+             
+            <h:outputLabel for="empresa" value="Empresa: " />
+            <p:inputText id="empresa" required="false"  value="#{gerenciadorCadastros.empresa}"/>
+             
+            <p:outputLabel for="atuacao" value="Area de Atuação: " />
+            <p:inputText id="atuacao" required="false" value="#{gerenciadorCadastros.areaAtuacao}" />
+            
+            <p:outputLabel value="O que deseja fazer no Help Vagas ?*" />
+            <p:selectOneListbox id="basic" value="#{gerenciadorCadastros.tipoUsuario}">
+                <f:selectItem itemLabel="Procuro uma vaga." itemValue="1" />
+                <f:selectItem itemLabel="Vou anúnciar uma vaga!" itemValue="2" />
+            </p:selectOneListbox>
+ 
+            
+        </h:panelGrid>
+        <p:commandButton value="Cadastrar" action="#{gerenciadorCadastros.cadastrarUsuario()}" ajax="false"/>
+    </p:panel>
+</h:form>
+        
+    </h:body>
+</html>

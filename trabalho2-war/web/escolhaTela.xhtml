@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Vagas Criadas por Você"/></h1>
+                <p:button value="Adicionar Nova Vaga da sua Empresa" outcome="cadastrarVaga" />
+                <p:button value="Voltar" outcome="perfil" />
+                
+                
+                <p:dataScroller value="#{clienteMBean.listaVagasLogado}" var="vaga">
+                    <f:facet name ="header">
+                        Vagas
+                    </f:facet>
+                    <p:outputPanel>
+                        <h:panelGrid>
+                            <h:outputText value="Area:" />
+                            <h:outputText value="#{vaga.area}" style="font-weight: bold" />
+                            
+                            <h:outputText value="Nome:" />
+                            <h:outputText value="#{vaga.nome}" style ="font-weight: bold" />
+                            
+                            <h:outputText value="Salário:" />
+                            <h:outputText value="#{vaga.salario}" style ="font-weight: bold" />
+                            
+                            <h:outputText value="Empresa:" />
+                            <h:outputText value="#{vaga.empresa}" style ="font-weight: bold" />
+                            
+                            <h:outputText value="Local:" />
+                            <h:outputText value="#{vaga.local}" style ="font-weight: bold" />
+                            
+                            <h:outputText value="Horário:" />
+                            <h:outputText value="#{vaga.horario}" style ="font-weight: bold" />
+                            
+                            <p:dataScroller value="#{clienteMBean.getListaClientesInscritos(vaga.id)}" var="cliente">
+                                <f:facet name ="header">
+                                    Inscritos
+                                </f:facet>
+                                <p:outputPanel>
+                                    <h:panelGrid>
+                                        <h:outputText value="Nome:" />
+                                        <h:outputText value="#{cliente.nome}" style="font-weight: bold" />
+                                        
+                                        <h:commandButton value="Currículo"  action="#{clienteMBean.acessaCurriculo(cliente.id)}"/>
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </p:dataScroller>
+                            
+                            <p:commandButton value="Apagar Vaga" action="#{clienteMBean.deleteVaga(vaga.id)}" ajax="false"/>
+                        </h:panelGrid>
+                    </p:outputPanel>
+                </p:dataScroller>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>

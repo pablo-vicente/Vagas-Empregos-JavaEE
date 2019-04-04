@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="estilo.css" rel="stylesheet" type="text/css" />
+        <title>Vagas De Empregos</title>
+    </h:head>
+    <h:body>
+        
+        <div id="topo" >
+            <div id="titulo">
+                <h1><h:outputText value="HELP VAGAS"/></h1>
+            </div>
+            <div id="cadastroLogin">
+                <div id="login">
+                    <h:form>
+                        <p:inputText placeholder="Login" value="#{gerenciadorCadastros.login}"  /> 
+                        <p:inputText type="password" placeholder="Password" value="#{gerenciadorCadastros.senha}" /> 
+                        <p:commandButton id="Submit" value="Entrar" action="#{gerenciadorCadastros.realizarLogin()}" ajax="false" />
+                        <p:commandButton value="Cadastre-se aqui" action="#{gerenciadorCadastros.novoCadastro()}" />
+                        <p:messages id="messages" showDetail="true" closable="true" autoUpdate="true"></p:messages>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <f:view>
+            <h:form>
+                
+                <p:dataTable var="Vagasemprego" value="#{GerenciadorVagas.listaVagas}">
+                    <p:column headerText="Código Vaga" filterBy="#{Vagasemprego.idvaga}">
+                       <h:outputText value="#{Vagasemprego.idvaga}" />
+                   </p:column>
+                    <p:column headerText="Tipo de Vaga" filterBy="#{Vagasemprego.tipo}">
+                       <h:outputText value="#{Vagasemprego.tipo}" /> 
+                   </p:column>
+                    <p:column headerText="Area de Atuação" filterBy="#{Vagasemprego.atuacao}">
+                        <h:outputText value="#{Vagasemprego.atuacao}" />
+                   </p:column>
+                    <p:column headerText="Empresa Contratante" filterBy="#{Vagasemprego.empresa}">
+                          <h:outputText value="#{Vagasemprego.empresa}" />
+                   </p:column>
+                    <p:column headerText="Descrição Vaga" filterBy="#{Vagasemprego.descricao}">
+                          <h:outputText value="#{Vagasemprego.descricao}" />
+                   </p:column>
+                    <p:column headerText="Remuneração" filterBy="#{Vagasemprego.remuneracao}">
+                          <h:outputText value="#{Vagasemprego.remuneracao}" />
+                   </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>
+

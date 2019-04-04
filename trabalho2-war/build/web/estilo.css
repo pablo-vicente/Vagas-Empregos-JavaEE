@@ -1,0 +1,70 @@
+#topo {
+ width: 100%;
+ height: 10%;
+ margin: 0 auto;
+ background: aqua;
+}
+
+#titulo {
+ width: 50%;
+ float: left;
+ font-size: 15px;
+ height: 10%;
+ margin: auto;
+ /*background: blue;*/
+}
+
+#cadastroLogin {
+ width: 50%; 
+ float: right;
+ height: 100%;
+ margin: auto;
+ /*background: antiquewhite;*/
+ text-align: right;
+}
+
+#login {
+ width: 100%; 
+text-align: right;
+ height: 100%;
+ margin: auto;
+/* background: aquamarine;*/
+ float: right;
+}
+
+#grande {
+ width: 100%;
+ height: 200px;
+ margin: 0 auto;
+ /*background: aqua;*/
+ text-align: center;
+}
+
+#botao1 {
+ width: 50%;
+ float: left;
+ font-size: 72px;
+ height: 100%;
+/*background: blue;*/
+text-height: auto;
+}
+
+#botao2 {
+ width: 50%; 
+ float: right;
+ height: 100%;
+ font-size: 72px;
+ /*background: antiquewhite;*/
+ text-align: center;
+}
+
+#topoEmpregado {
+ width: 100%; 
+ float: right;
+ height: 20%;
+ font-size: 16px;
+ background: background;
+ /*text-align: center;*/
+ text-height: font-size;
+ color: white;
+}
